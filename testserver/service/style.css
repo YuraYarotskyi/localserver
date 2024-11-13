@@ -1,3 +1,66 @@
-h1{
-    color: magenta;
+
+body{
+    background-color: rgb(50, 67, 71);
+}
+
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.conteiner{
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 35vh;
+}
+
+.button{
+    font-family: "Montserrat", sans-serif;
+    color: whitesmoke;
+    background-color: rgb(60,
+                            60, 
+                            60);
+    font-size: xx-large;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0px 0px 50px lightblue;
+    
+    transition: .3s ease-in-out;
+}
+
+.button:hover{
+    background-color: rgb(80, 80, 80);
+    box-shadow: 0px 0px 10px lightblue;
+    cursor: pointer;
+    transform: translate(0px, 10px);
+}
+
+.button:focus{
+    animation: pressed 5s ease-in-out;
+}
+
+
+
+@keyframes pressed{
+    0% {
+        color: whitesmoke;
+    }
+    15% {
+        color: aqua;
+    }
+    60% {
+        color: aqua;
+    } 75% {
+        color: whitesmoke;
+    } 100% {
+        color: whitesmoke;
+    }
 }
