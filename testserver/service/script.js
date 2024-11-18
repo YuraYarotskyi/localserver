@@ -2,7 +2,7 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 
 async function play_sound()
 {
-    let button = document.getElementById("button");
+    let button = document.getElementById("play_sound_button");
     let rq = "play";
     
     console.log(1);
@@ -21,3 +21,11 @@ async function play_sound()
     button.blur();
     
 };
+
+function onChange(inp)
+{
+    var file = inp.value;
+    var name = file.split("\\");
+
+    document.getElementById("file_upload_label").textContent = name[name.length - 1];
+}
