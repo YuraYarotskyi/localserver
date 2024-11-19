@@ -13,35 +13,21 @@ body{
 
 .conteiner{
     max-width: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 35vh;
+    margin-top: 30vh;
+
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .file_upload_label{
     margin-top: -1px;
     margin-bottom: -2px;
-}
-
-.opt_inp{
-    text-align: center;
-    font-size: xx-small;
-}
-
-.input_file{
-    max-width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 15vh;
-    background-color: beige;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 10px;
-    padding-bottom: 1px;
-}
-
-.input_file::hover{
-    cursor: pointer;
 }
 
 .play_sound_button{
@@ -55,8 +41,6 @@ body{
     padding-right: 50px;
     padding-top: 20px;
     padding-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
     border: none;
     border-radius: 15px;
     box-shadow: 0px 0px 50px lightblue;
@@ -78,26 +62,23 @@ body{
 .upload_button{
     font-family: "Montserrat", sans-serif;
     color: whitesmoke;
-    background-color: rgb(60,
-                          60, 
-                          60);
-    font-size: xx-large;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    background-color: rgb(60, 60, 60);
+    font-size: normal;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 60px;
     border: none;
     border-radius: 15px;
-    box-shadow: 0px 0px 50px lightblue;
+    box-shadow: 0px 0px 30px rgb(230, 229, 173);
     
     transition: .3s ease-in-out;
 }
 
 .upload_button:hover{
     background-color: rgb(80, 80, 80);
-    box-shadow: 0px 0px 10px lightblue;
+    box-shadow: 0px 0px 8px rgb(230, 229, 173);
     cursor: pointer;
     transform: translate(0px, 10px);
 }

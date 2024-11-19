@@ -27,5 +27,5 @@ function onChange(inp)
     var file = inp.value;
     var name = file.split("\\");
 
-    document.getElementById("file_upload_label").textContent = name[name.length - 1];
+    document.getElementById("upload_button").textContent = name;
 }

@@ -15,10 +15,10 @@
             <button class="play_sound_button" id="play_sound_button" onclick="play_sound();">
                     Play sound
             </button>
-            <br>
-            <button class="upload_button" id="upload_button" onclick="play_sound();">
+            <button class="upload_button" id="upload_button" onclick="document.getElementById('inp_file').click();">
                 Upload your file
             </button>
+            <input type="file" style="display: none;" id="inp_file" accept="audio/*" onchange="onChange(self)">
         </div>
     </body>
 </html>
