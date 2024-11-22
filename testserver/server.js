@@ -1,20 +1,37 @@
 const { spawn } = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
+const multer = require('multer');
+const formidable = require('formidable')
+
+//preparation packets
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads/');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
 
 const app = express();
 const port = 3000;
+const upload = multer({ storage: storage });
 
+//frameworks, settings, etc.
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
 app.use('/', express.static('./service'));
 
+//python child spawner
 
-function play_music()
+function play_music(arg)
 {
     return new Promise((resolve, reject) => {
-        const python_process = spawn('python', ['./index.py']);
+
+        const python_process = spawn('python', ['./index.py', arg]);
         let r_data = '';
     
         python_process.stdout.on('data', (data) => {
@@ -38,6 +55,7 @@ function play_music()
     });
 }
 
+//get
 
 app.get('/', (req, res) => {
     res.sendFile(
@@ -45,18 +63,34 @@ app.get('/', (req, res) => {
     );
 });
 
-app.post('/', (req, res) => {
-    const data = req.body.rq;
+//posts
 
-    if (data == 'play')
+app.post('/', (req, res) => {
+
+    play_music("play_def").then(function(msg)
     {
-        play_music().then(function(msg)
-        {
-            console.log(msg);
-            res.json(msg);
-        });
-    }
+        console.log(msg);
+        res.json(msg);
+    });
 });
+
+app.post('/upload', upload.single('file'), (req, res) => {
+
+    const form = formidable({multiples:true});
+    form.parse(req, (err, fields, files) =>{
+        console.log(fields);
+    })
+    // var file = req.body.label;
+    // console.log(file);
+    play_music(file).then(function(msg)
+    {
+        console.log(msg);
+        res.json(msg);
+    });
+
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
