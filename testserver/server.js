@@ -2,7 +2,7 @@ const { spawn } = require('child_process');
 const express = require('express');
 const bodyParser = require('body-parser');
 const multer = require('multer');
-const formidable = require('formidable')
+const { transliterate } = require('transliteration');
 
 //preparation packets
 
@@ -67,7 +67,7 @@ app.get('/', (req, res) => {
 
 app.post('/', (req, res) => {
 
-    play_music("play_def").then(function(msg)
+    play_music(req.body.play_type).then(function(msg)
     {
         console.log(msg);
         res.json(msg);
@@ -75,22 +75,22 @@ app.post('/', (req, res) => {
 });
 
 app.post('/upload', upload.single('file'), (req, res) => {
-
-    const form = formidable({multiples:true});
-    form.parse(req, (err, fields, files) =>{
-        console.log(fields);
-    })
-    // var file = req.body.label;
-    // console.log(file);
-    play_music(file).then(function(msg)
+    
+    var file = req.file;
+    console.log(file);
+    if(file)
     {
-        console.log(msg);
-        res.json(msg);
-    });
-
+        res.json('0');
+    } else {
+        res.json('500');
+    }
 });
 
+app.post('/upload/transliterate', (req, res) =>{
+    res.json(transliterate(req.body.name));
+})
 
+//listener
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

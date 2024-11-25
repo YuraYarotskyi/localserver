@@ -3,24 +3,30 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Preconnecting all the libraries -->
         <link rel="stylesheet" href="style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
         <script src="script.js"></script>
+
         <title>Player</title>
     </head>
+    
     <body>
         <div class="conteiner">
+
             <button class="play_sound_button" id="play_sound_button" onclick="play_sound();">
                 Play sound
             </button>
             
-            <button class="upload_button" id="upload_button" onclick="document.getElementById('inp_file').click();">
-                Upload your file
-            </button>
+            <div class="input_conteiner">
+                <button class="upload_button" id="upload_button" onclick="document.getElementById('inp_file').click();">Upload your file</button>
 
-            <input type="file" style="display: none;" id="inp_file" accept="audio/*" onchange="onChange(self)">
+                <button onclick="reset_file_input()" class="reset_file_button">reset</button>
+                
+                <input type="file" style="display: none;" id="inp_file" accept="audio/*" onchange="onChange(self)">
+            </div> 
         </div>
     </body>
 </html>
