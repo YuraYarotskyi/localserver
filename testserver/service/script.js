@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 //renaming and changing the file
@@ -97,3 +99,14 @@ function onChange()
         document.getElementById("upload_button").textContent = "Upload your file";
     };
 }
+
+//killin' sound play process
+
+function stop_music()
+{
+    fetch('/kill_sound', {
+        method: 'POST'
+    }).then(response=> response.json()).then(data =>{
+        console.log(data);
+    });
+};
