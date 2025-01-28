@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const multer = require('multer');
 const { transliterate } = require('transliteration');
 
-//preparation packets
+//preparating packets
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,23 +33,24 @@ function play_music(arg)
 
         const python_process = spawn('python', ['./index.py', arg]);
         let r_data = '';
-    
+
         python_process.stdout.on('data', (data) => {
-            r_data += data.toString();
-            console.log(`Stdout: ${data.toString()}`)
+            console.log(`\x1b[1m\x1b[92mStdout:\x1b[0m ${data.toString()}`)
+            r_data += data;
         });
         
         python_process.stderr.on('data', (data) => {
-            console.log(`Stderr: ${data.toString()}`)
+            console.log(`\x1b[1m\x1b[91mStderr:\x1b[0m ${data.toString()}`)
+            r_data += data;
         });
         
         python_process.on('close', (code) => {
-            console.log(`Close: ${code.toString()}`)
-            resolve(r_data.trim());
+            console.log(`\x1b[1m\x1b[33mClose:\x1b[0m ${code.toString()}`)
+            resolve(r_data);
         });
         
         python_process.on("error", (error) =>{
-            console.log(`Error: ${error.toString()}`)
+            console.log(`\x1b[1m\x1b[91mError:\x1b[0m ${error.toString()}`)
             reject(new Error(error))
         });
     });
@@ -60,30 +61,26 @@ function stop_music()
     return new Promise((resolve, reject) => {
 
         const python_process = spawn('python', ['./index.py', "server_post_kill"]);
-        let r_data = '';
     
         python_process.stdout.on('data', (data) => {
-            r_data += data.toString();
-            console.log(`Stdout: ${data.toString()}`)
+            console.log(`\x1b[1m\x1b[92mStdout:\x1b[0m ${data.toString()}`)
         });
         
         python_process.stderr.on('data', (data) => {
-            console.log(`Stderr: ${data.toString()}`)
+            console.log(`\x1b[1m\x1b[91mStderr:\x1b[0m ${data.toString()}`)
         });
         
         python_process.on('close', (code) => {
-            console.log(`Close: ${code.toString()}`)
-            resolve(r_data.trim());
+            console.log(`\x1b[1m\x1b[33mClose:\x1b[0m ${code.toString()}`)
+            resolve(1);
         });
         
         python_process.on("error", (error) =>{
-            console.log(`Error: ${error.toString()}`)
+            console.log(`\x1b[1m\x1b[91mError:\x1b[0m ${error.toString()}`)
             reject(new Error(error))
         });
     });
 };
-
-
 
 //get
 
@@ -99,7 +96,6 @@ app.post('/', (req, res) => {
 
     play_music(req.body.play_type).then(function(msg)
     {
-        console.log(msg);
         res.json(msg);
     });
 });
@@ -127,5 +123,5 @@ app.post('/kill_sound', (req, res) =>{
 //listener
 
 app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
+    console.log(`Server is running on port \x1b[1m\x1b[94m${port}\x1b[0m`);
 });

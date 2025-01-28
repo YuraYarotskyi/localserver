@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 //renaming and changing the file
@@ -45,6 +43,7 @@ function upload_sound(file)
 async function play_sound()
 {    
     var button = document.getElementById('play_sound_button');
+    
     if(document.getElementById("inp_file").files[0] == null)
     {
         var play_type = "default_sound";
